@@ -161,7 +161,7 @@ final class WavefrontParser {
     }
     
     private func parse(line: String, for wavefront: Wavefront) {
-        let elements = line.components(separatedBy: " ")
+        let elements = line.components(separatedBy: " ").filter { !$0.isEmpty }
         // Skip unknown markers
         guard let marker = elements.first, let object = WavefrontObject(rawValue: marker) else { return }
         object.consume(elements: elements, for: wavefront, using: self)
