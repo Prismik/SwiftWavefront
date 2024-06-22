@@ -44,7 +44,7 @@ private enum WavefrontObject: String {
             }
             wavefront.textcoords.append(contentsOf: [u, v])
         case .object:
-            let name = elements[1]
+            break
         case .group:
             break
         case .face:
@@ -191,6 +191,7 @@ final class WavefrontParser {
             switch face.vertexIndices.count {
             case let x where x == 3: // Normal triangles
                 shape.indices.append(contentsOf: face.vertexIndices)
+                shape.numFaceVertices.append(3) // Add two triangles
             case let x where x == 4: // Quads
                 let i0 = face.vertexIndices[0]
                 let i1 = face.vertexIndices[1]
