@@ -92,12 +92,12 @@ private enum WavefrontObject: String {
                 vn = v
             } else {
                 // i/j
-                guard let idxt = Int(parts[0]), let fvt = try? fix(index: idxt, n: vtSize) else { fatalError("Invalid index format for faces") }
+                guard let idxt = Int(parts[1]), let fvt = try? fix(index: idxt, n: vtSize) else { fatalError("Invalid index format for faces") }
                 vt = fvt
                 
                 // i/j/k
                 guard parts.count == 3 else { return VertexAttributes(vIndex: v, vnIndex: vn, vtIndex: vt) }
-                guard let idxn = Int(parts[0]), let fvn = try? fix(index: idxn, n: vnSize) else { fatalError("Invalid index format for faces") }
+                guard let idxn = Int(parts[2]), let fvn = try? fix(index: idxn, n: vnSize) else { fatalError("Invalid index format for faces") }
                 vn = fvn
             }
             
@@ -171,12 +171,13 @@ final class WavefrontParser {
      Converts quads into pairs of triangles using one of the two possible configurations.
      
      ```
-       1       2
-     +---+   +---+
-     |\  |   |  /|
-     | \ |   |  /|
-     |  \|   |/  |
-     +---+   +---+
+     0   1      0   1
+     +---+      +---+
+     |\  |      |  /|
+     | \ |  OR  | / |
+     |  \|      |/  |
+     +---+      +---+
+     2   3      2   3
      ```
      */
     private func triangulate(into shape: Shape, for wavefront: Wavefront) {
