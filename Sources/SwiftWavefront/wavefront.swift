@@ -9,7 +9,7 @@ import Foundation
 
 /// Contains single and linear arrays of vertex data (position, normal and texcoord)
 /// Only supports triangles for now.
-final class Wavefront {
+public final class Wavefront {
     let filename: URL
     let encoding: String.Encoding
     /**
@@ -52,12 +52,12 @@ final class Wavefront {
     
     private let parser = WavefrontParser()
 
-    init(filename: URL, encoding: String.Encoding) {
+    public init(filename: URL, encoding: String.Encoding) {
         self.filename = filename
         self.encoding = encoding
     }
     
-    func parse() throws {
+    public func parse() throws {
         try parser.parse(wavefront: self)
     }
 }

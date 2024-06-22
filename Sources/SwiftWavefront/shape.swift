@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class Shape {
+public final class Shape {
     /**
      Array of VertexAttributes. Each entry has the associated index to vertices, normals and textcoords.
      

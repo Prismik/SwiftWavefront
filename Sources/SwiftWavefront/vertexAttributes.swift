@@ -8,8 +8,8 @@
 import Foundation
 
 /// Vertex index attributes
-struct VertexAttributes {
-    let vIndex: Int
-    let vnIndex: Int
-    let vtIndex: Int
+public struct VertexAttributes {
+    public let vIndex: Int
+    public let vnIndex: Int
+    public let vtIndex: Int
 }
