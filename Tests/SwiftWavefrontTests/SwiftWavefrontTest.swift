@@ -63,4 +63,19 @@ final class SwiftWavefrontTest: XCTestCase {
         XCTAssertEqual(wavefront.shapes[0].indices.map { $0.vIndex }, [0, 1, 2, 3, 4, 5])
         XCTAssertEqual(wavefront.shapes[0].numFaceVertices.count, wavefront.shapes[0].indices.count / 3)
     }
+    
+    func testParsingRelativeIndices() throws {
+        guard let path = assetsDir?.appendingPathComponent("relative.obj") else {
+            XCTFail()
+            return
+        }
+
+        let wavefront = Wavefront(filename: path, encoding: .utf8)
+        try wavefront.parse()
+        XCTAssertEqual(wavefront.vertices.count, 6 * 3)
+        XCTAssertEqual(wavefront.normals.count, 0)
+        XCTAssertEqual(wavefront.textcoords.count, 0)
+        XCTAssertEqual(wavefront.shapes[0].indices.map { $0.vIndex }, [0, 1, 2, 3, 4, 5])
+        XCTAssertEqual(wavefront.shapes[0].numFaceVertices.count, wavefront.shapes[0].indices.count / 3)
+    }
 }

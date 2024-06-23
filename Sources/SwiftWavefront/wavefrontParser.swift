@@ -50,7 +50,8 @@ private enum WavefrontObject: String {
         case .face:
             var face = Face()
             for e in elements[1...] {
-                let attrib = Self.parseTriple(e, vSize: wavefront.vertices.count, vnSize: wavefront.normals.count, vtSize: wavefront.textcoords.count)
+                let (v, vn, vt) = (wavefront.vertices.count / 3, wavefront.normals.count / 3, wavefront.textcoords.count / 2)
+                let attrib = Self.parseTriple(e, vSize: v, vnSize: vn, vtSize: vt)
                 face.vertexIndices.append(attrib)
             }
             
@@ -88,8 +89,8 @@ private enum WavefrontObject: String {
             var vn: Int = -1
 
             // i//k
-            if parts[1] == "", let idxn = Int(parts[2]), let v = try? fix(index: idxn, n: vnSize)  {
-                vn = v
+            if parts[1] == "", let idxn = Int(parts[2]), let fvn = try? fix(index: idxn, n: vnSize)  {
+                vn = fvn
             } else {
                 // i/j
                 guard let idxt = Int(parts[1]), let fvt = try? fix(index: idxt, n: vtSize) else { fatalError("Invalid index format for faces") }
