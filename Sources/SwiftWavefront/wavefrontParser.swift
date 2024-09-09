@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Cocoa
 
 // TODO Support vertex color
 private enum WavefrontObject: String {
